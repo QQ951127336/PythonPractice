@@ -75,6 +75,56 @@ def insertBST(node, value):
         return node
     return BiTreeNode(value)
 
+def deleteBST(pre, node, value):
+    if node:
+        isLeft = None
+        if pre:
+            if pre.getLeft() == node:
+                isLeft = True
+            else:
+                isLeft = False
+        if node.getValue() == value:
+            if node.getLeft() is None and node.getRight() is None:
+                if pre:
+                    if isLeft:
+                        pre.leftNode = None
+                    else:
+                        pre.rightNode = None
+                else:
+                    return None
+            elif node.getLeft() is None:
+                if pre:
+                    if isLeft:
+                        pre.leftNode = node.getRight()
+                    else:
+                        pre.rightNode = node.getRight()
+                else:
+                    return node.getRight()
+            elif node.getRight() is None:
+                if pre:
+                    if isLeft:
+                        pre.leftNode = node.getLeft()
+                    else:
+                        pre.rightNode = node.getLeft()
+                else:
+                    return node.getLeft()
+            else:
+                tmpNode = node.getLeft()
+                while(tmpNode.getRight()):
+                    tmpNode = tmpNode.getRight()
+                tmpNode.rightNode = node.getRight()
+                if pre:
+                    if isLeft:
+                        pre.leftNode = node.getLeft()
+                    else:
+                        pre.rightNode = node.getLeft()
+                else:
+                    return node.getLeft()
+        elif node.getValue() < value:
+            deleteBST(node, node.getRight(), value)
+        else:
+            deleteBST(node, node.getLeft(), value)
+        return node
 
 if __name__ == '__main__':
     root = insertBST(None, 3)
@@ -87,4 +137,12 @@ if __name__ == '__main__':
     print("")
     print("------------")
     traverseMid(root)
+    root = deleteBST(None, root, 1)
+    print("")
+    print("------------")
+    traversePre(root)
+    print("")
+    print("------------")
+    traverseMid(root)
+
 

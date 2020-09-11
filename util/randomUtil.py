@@ -2,11 +2,12 @@
 # -*- coding:utf-8 -*-
 import random
 
+
 class RandomUtil():
 
     def getRandomList(self, length, min, max):
         data = []
-        while(length > 0):
+        while (length > 0):
             data.append(random.randint(min, max))
             length = length - 1
         return data

@@ -31,9 +31,10 @@ class BiTreeNode:
 
     def setValue(self, value):
         self.data = value
-        
+
     def getValue(self):
         return self.data
+
 
 def traversePre(node):
     if node is not None:
@@ -41,11 +42,13 @@ def traversePre(node):
         traversePre(node.getLeft())
         traversePre(node.getRight())
 
+
 def traverseMid(node):
     if node is not None:
         traverseMid(node.getLeft())
         print(node.data, end=" ")
         traverseMid(node.getRight())
+
 
 def traverseLast(node):
     if node is not None:
@@ -53,12 +56,14 @@ def traverseLast(node):
         traverseLast(node.getRight())
         print(node.data, end=" ")
 
+
 def maxDeep(node):
     if node is not None:
         leftDeep = maxDeep(node.getLeft())
         rightDeep = maxDeep(node.getRight())
         return max(leftDeep, rightDeep) + 1
     return 0
+
 
 def insertBST(node, value):
     if node:
@@ -74,6 +79,7 @@ def insertBST(node, value):
                 node.setLeft(value)
         return node
     return BiTreeNode(value)
+
 
 def deleteBST(pre, node, value):
     if node:
@@ -110,7 +116,7 @@ def deleteBST(pre, node, value):
                     return node.getLeft()
             else:
                 tmpNode = node.getLeft()
-                while(tmpNode.getRight()):
+                while (tmpNode.getRight()):
                     tmpNode = tmpNode.getRight()
                 tmpNode.rightNode = node.getRight()
                 if pre:
@@ -125,6 +131,7 @@ def deleteBST(pre, node, value):
         else:
             deleteBST(node, node.getLeft(), value)
         return node
+
 
 if __name__ == '__main__':
     root = insertBST(None, 3)
@@ -144,5 +151,3 @@ if __name__ == '__main__':
     print("")
     print("------------")
     traverseMid(root)
-
-

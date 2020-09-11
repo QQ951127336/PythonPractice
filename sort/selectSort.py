@@ -17,7 +17,7 @@ def selectSort(dataList, order=Order.AES):
                 dataList[start], dataList[index] = dataList[index], dataList[start]
     return dataList
 
+
 if __name__ == '__main__':
     print(selectSort(RandomUtil().getRandomList(10, 0, 100)))
     print(selectSort(RandomUtil().getRandomList(10, 0, 100), Order.DES))
-
